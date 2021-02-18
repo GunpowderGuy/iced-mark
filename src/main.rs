@@ -33,9 +33,11 @@ impl Sandbox for Hello {
 
     fn view(&mut self) -> Element<Self::Message> {
         //Text::new("Hello, world!").into()
-        let markdown_input = " *italic* **bold** ~~complicated~~";
-        let result = mark::parseo(markdown_input, self);
+        let markdown_input = //" ~~complicated~~ *italic* **bold**  
 
-        return result;
+        "![alt text](resources/ferris.png \"Logo Title Text 1\")";
+
+        // print!("{}", mark::semi_parseo(markdown_input));
+        mark::parseo(markdown_input)
     }
 }

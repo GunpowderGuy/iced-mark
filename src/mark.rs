@@ -18,7 +18,7 @@ fn transformar(stri: &str, estado: &Tag) -> String {
     }
 }
 
-fn semi_parseo(markdown_input: &str) -> String {
+pub fn semi_parseo(markdown_input: &str) -> String {
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);
     let parser = Parser::new_ext(markdown_input, options);
@@ -44,22 +44,22 @@ fn semi_parseo(markdown_input: &str) -> String {
     })
 }
 
-enum Message {}
+pub fn parseo<T: 'static>(markdown_input: &str) -> Element<T> {
+    //let markdown_input = semi_parseo(markdown_input0);
 
-fn parseo(markdown_input0: &str) -> Element<Message> {
-    let markdown_input = semi_parseo(markdown_input0);
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);
     let parser = Parser::new_ext(&markdown_input, options);
 
-    let mut estado: Option<Tag> = None;
+    //let estado: Option<Tag> = None;
 
     parser
         .fold(Column::new(), |colu, x| match x {
             Event::Start(variante) => match variante {
-                Tag::Image(a, link, c) => colu.push(Image::new(link.to_string())),
+                Tag::Image(_a, link, _c) => colu.push(Image::new(link.to_string())),
                 _ => colu,
             },
+            Event::Text(contenido) => colu.push(Text::new(contenido.to_string())),
             _ => colu,
         })
         .into()
