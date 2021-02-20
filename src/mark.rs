@@ -23,6 +23,10 @@ pub fn semi_parseo(markdown_input: &str) -> String {
     options.insert(Options::ENABLE_STRIKETHROUGH);
     let parser = Parser::new_ext(markdown_input, options);
 
+    let resultado: Vec<Event> = Parser::new_ext(markdown_input, options).collect();
+
+    println!("{:?}", resultado);
+
     let mut estado: Option<Tag> = None;
 
     parser.fold(String::from(""), |stri, x| {

@@ -25,13 +25,18 @@ impl Sandbox for Hello {
 
     fn view(&mut self) -> Element<Self::Message> {
         //Text::new("Hello, world!").into()
-        let markdown_input = "~~complicated~~ *italic* **bold**  
+        let _markdown_input = "~~complicated~~ *italic* **bold**  
 
         ![](resources/ferris.png \"Logo Title Text 1\")
              
         ~~simplex~~ *italic* **bold** ";
 
-        print!("{}", mark::semi_parseo(markdown_input));
-        mark::parseo(markdown_input)
+        let markdown_input = fs::read_to_string("resources/marco.markdown")
+            .expect("Something went wrong reading the file");
+
+        //print!("{}", mark::semi_parseo(markdown_input));
+        mark::parseo(&markdown_input)
     }
 }
+
+use std::fs;
