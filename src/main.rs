@@ -27,7 +27,7 @@ impl Sandbox for Hello {
         //Text::new("Hello, world!").into()
         let markdown_input = "~~complicated~~ *italic* **bold**  
 
-        ![alt text](resources/ferris.png \"Logo Title Text 1\")
+        ![](resources/ferris.png \"Logo Title Text 1\")
              
         ~~simplex~~ *italic* **bold** ";
 
