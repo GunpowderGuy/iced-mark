@@ -3,13 +3,13 @@ extern crate math_text_transform;
 
 use math_text_transform::MathTextTransform;
 
-use iced::{Column, Container, Element, Image, Text, TextInput};
+use iced::{Column, Element, Image, Text};
 
-fn transformar(stri: &str, estado: &Tag) -> String {
+fn _transformar(stri: &str, estado: &Tag) -> String {
     match estado {
         Tag::Emphasis => stri.to_math_italic(),
         Tag::Strong => stri.to_math_bold(),
-        Tag::Strikethrough => stri.chars().fold(String::new(), |mut x: String, y: char| {
+        Tag::Strikethrough => stri.chars().fold('̶'.to_string(), |mut x: String, y: char| {
             x.push(y);
             x.push('̶');
             x
@@ -33,7 +33,7 @@ pub fn semi_parseo(markdown_input: &str) -> String {
             Event::Text(contenido) => {
                 temporal = contenido.to_string();
                 if let Some(i) = &estado {
-                    temporal = transformar(&contenido.to_string(), &i);
+                    temporal = _transformar(&contenido.to_string(), &i);
                     estado = None;
                 }
             }
@@ -45,7 +45,7 @@ pub fn semi_parseo(markdown_input: &str) -> String {
 }
 
 pub fn parseo<T: 'static>(markdown_input: &str) -> Element<T> {
-    //let markdown_input = semi_parseo(markdown_input0);
+    let markdown_input = semi_parseo(markdown_input);
 
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);

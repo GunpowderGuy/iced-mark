@@ -1,14 +1,6 @@
-use iced::{Element, Sandbox, Settings, Text};
+use iced::{Element, Sandbox, Settings};
 
 mod mark;
-
-/*fn main() {
-    //let markdown_input = "Hello world, this is a ~~complicated~~ *very simple* example.";
-    let markdown_input = " *italic* **bold** ~~complicated~~";
-    let result = mark::parseo(markdown_input);
-
-    println!("Hello, world2! {}", result);
-}*/
 
 pub fn main() -> iced::Result {
     Hello::run(Settings::default())
@@ -33,11 +25,13 @@ impl Sandbox for Hello {
 
     fn view(&mut self) -> Element<Self::Message> {
         //Text::new("Hello, world!").into()
-        let markdown_input = //" ~~complicated~~ *italic* **bold**  
+        let markdown_input = "~~complicated~~ *italic* **bold**  
 
-        "![alt text](resources/ferris.png \"Logo Title Text 1\")";
+        ![alt text](resources/ferris.png \"Logo Title Text 1\")
+             
+        ~~simplex~~ *italic* **bold** ";
 
-        // print!("{}", mark::semi_parseo(markdown_input));
+        print!("{}", mark::semi_parseo(markdown_input));
         mark::parseo(markdown_input)
     }
 }
